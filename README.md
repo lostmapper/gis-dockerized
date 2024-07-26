@@ -50,6 +50,19 @@ $ docker compose down
 
 Note: Wherever possible a service's data is stored on the host machine so it persists between runs.
 
+### MapStore
+
+> [MapStore](https://docs.mapstore.geosolutionsgroup.com/) is an highly modular Open Source WebGIS framework to create, manage and securely share maps and mashups.
+
+Once the service is running you can access MapStore at <http://localhost:8081/mapstore/>
+
+The credentials for logging in as the MapStore admin are:
+
+- Username: `admin`
+- Password: `admin`
+
+MapStore's data is stored in the PostGIS database describe below.
+
 ### GeoServer
 
 > [GeoServer](https://geoserver.org) is an open source server for sharing geospatial data.

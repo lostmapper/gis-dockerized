@@ -1,4 +1,16 @@
 services:
+  mapstore:
+    image: geosolutionsit/mapstore2
+    ports:
+      - "8081:8080"
+    volumes:
+      - ./config/geostore-datasource-ovr-postgres.properties:/usr/local/tomcat/conf/geostore-datasource-ovr.properties
+    environment:
+      - JAVA_OPTS=-Dgeostore-ovr=file:///usr/local/tomcat/conf/geostore-datasource-ovr.properties
+    depends_on:
+      postgis:
+        condition: service_healthy
+
   geoserver:
     image: docker.osgeo.org/geoserver:2.25.3
     ports:
