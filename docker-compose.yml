@@ -1,0 +1,28 @@
+services:
+  geoserver:
+    image: docker.osgeo.org/geoserver:2.25.3
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./data/geoserver:/opt/geoserver_data/:Z
+    healthcheck:
+      test: curl --fail "http://localhost:8080/geoserver/web/wicket/resource/org.geoserver.web.GeoServerBasePage/img/logo.png" || exit 1
+      interval: 1m
+      retries: 3
+      timeout: 20s
+
+  postgis:
+    image: postgis/postgis:16-3.4
+    environment:
+      - POSTGRES_DB=gis
+      - POSTGRES_USER=gis
+      - POSTGRES_PASSWORD=password
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data/postgis:/var/lib/postgresql/data:Z
+    healthcheck:
+      test: pg_isready -U gis -h localhost -t 5 || exit 1
+      interval: 1m
+      retries: 3
+      timeout: 20s
