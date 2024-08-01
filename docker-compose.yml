@@ -38,3 +38,15 @@ services:
       interval: 1m
       retries: 3
       timeout: 20s
+
+  solr:
+    image: solr:9.6.1-slim
+    ports:
+      - "8983:8983"
+    command:
+      - solr-precreate
+      - blacklight-core
+      - /solr_conf
+    volumes:
+      - ./data/solr:/var/solr
+      - ./solr_conf:/solr_conf
