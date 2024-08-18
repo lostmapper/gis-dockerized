@@ -17,6 +17,8 @@ services:
       - "8080:8080"
     volumes:
       - ./data/geoserver:/opt/geoserver_data/:Z
+    environment:
+      - ROOT_WEBAPP_REDIRECT=true
     healthcheck:
       test: curl --fail "http://localhost:8080/geoserver/web/wicket/resource/org.geoserver.web.GeoServerBasePage/img/logo.png" || exit 1
       interval: 1m
