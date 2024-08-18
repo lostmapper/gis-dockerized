@@ -19,6 +19,8 @@ services:
       - ./data/geoserver:/opt/geoserver_data/:Z
     environment:
       - ROOT_WEBAPP_REDIRECT=true
+      - GEOSERVER_ADMIN_USER=gis
+      - GEOSERVER_ADMIN_PASSWORD=password
     healthcheck:
       test: curl --fail "http://localhost:8080/geoserver/web/wicket/resource/org.geoserver.web.GeoServerBasePage/img/logo.png" || exit 1
       interval: 1m

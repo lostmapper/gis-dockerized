@@ -68,16 +68,16 @@ $ docker compose up mapstore postgis
 
 Note: Wherever possible a service's data is stored on the host machine so it persists between runs.
 
-| Service   | Name        | URL                                    | Username | Password    | Data Location    |
-|-----------|-------------|----------------------------------------|----------|-------------|------------------|
-| MapStore  | `mapstore`  | <http://localhost:8081/mapstore/>      | `admin`  | `admin`     | PostGIS          |
-| GeoServer | `geoserver` | <http://localhost:8080/geoserver/web/> | `admin`  | `geoserver` | `data/geoserver` |
-| PostGIS   | `postgis`   | N/A                                    | `gis`    | `password`  | `data/postgis`   |
-| Solr      | `solr`      | <http://localhost:8983/solr/>          | N/A      | N/A         | `data/solr`      |
+| Service   | Name        | URL                                    | Username | Password   | Data Location    |
+|-----------|-------------|----------------------------------------|----------|------------|------------------|
+| MapStore  | `mapstore`  | <http://localhost:8081/mapstore/>      | `admin`  | `admin`    | PostGIS          |
+| GeoServer | `geoserver` | <http://localhost:8080/geoserver/web/> | `gis`    | `password` | `data/geoserver` |
+| PostGIS   | `postgis`   | N/A                                    | `gis`    | `password` | `data/postgis`   |
+| Solr      | `solr`      | <http://localhost:8983/solr/>          | N/A      | N/A        | `data/solr`      |
 
 ### MapStore (mapstore)
 
-> [MapStore](https://docs.mapstore.geosolutionsgroup.com/) is an highly modular Open Source WebGIS framework to create, manage and securely share maps and mashups.
+> [MapStore](https://docs.mapstore.geosolutionsgroup.com/) is a highly modular Open Source WebGIS framework to create, manage and securely share maps and mashups.
 
 Once the service is running you can access MapStore at <http://localhost:8081/mapstore/>
 
@@ -96,8 +96,8 @@ Once the service is running you can access GeoServer at <http://localhost:8080/g
 
 The credentials for logging in as the GeoServer admin are:
 
-- Username: `admin`
-- Password: `geoserver`
+- Username: `gis`
+- Password: `password`
 
 GeoServers's data is stored in `data/geoserver`.
 
