@@ -1,16 +1,4 @@
 services:
-  mapstore:
-    image: geosolutionsit/mapstore2
-    ports:
-      - "8081:8080"
-    volumes:
-      - ./config/geostore-datasource-ovr-postgres.properties:/usr/local/tomcat/conf/geostore-datasource-ovr.properties
-    environment:
-      - JAVA_OPTS=-Dgeostore-ovr=file:///usr/local/tomcat/conf/geostore-datasource-ovr.properties
-    depends_on:
-      postgis:
-        condition: service_healthy
-
   geoserver:
     image: docker.osgeo.org/geoserver:2.25.3
     ports:
@@ -18,25 +6,37 @@ services:
     volumes:
       - ./data/geoserver:/opt/geoserver_data/:Z
     environment:
-      - ROOT_WEBAPP_REDIRECT=true
-      - GEOSERVER_ADMIN_USER=gis
-      - GEOSERVER_ADMIN_PASSWORD=password
+      ROOT_WEBAPP_REDIRECT: "true"
+      GEOSERVER_ADMIN_USER: "gis"
+      GEOSERVER_ADMIN_PASSWORD: "password"
     healthcheck:
       test: curl --fail "http://localhost:8080/geoserver/web/wicket/resource/org.geoserver.web.GeoServerBasePage/img/logo.png" || exit 1
       interval: 1m
       retries: 3
       timeout: 20s
 
+  mapstore:
+    image: geosolutionsit/mapstore2
+    ports:
+      - "8081:8080"
+    volumes:
+      - ./config/geostore-datasource-ovr-postgres.properties:/usr/local/tomcat/conf/geostore-datasource-ovr.properties
+    environment:
+      JAVA_OPTS: "-Dgeostore-ovr=file:///usr/local/tomcat/conf/geostore-datasource-ovr.properties"
+    depends_on:
+      postgis:
+        condition: service_healthy
+
   postgis:
     image: postgis/postgis:16-3.4
-    environment:
-      - POSTGRES_DB=gis
-      - POSTGRES_USER=gis
-      - POSTGRES_PASSWORD=password
     ports:
       - "5432:5432"
     volumes:
       - ./data/postgis:/var/lib/postgresql/data:Z
+    environment:
+      POSTGRES_DB: "gis"
+      POSTGRES_USER: "gis"
+      POSTGRES_PASSWORD: "password"
     healthcheck:
       test: pg_isready -U gis -h localhost -t 5 || exit 1
       interval: 1m
@@ -47,10 +47,10 @@ services:
     image: solr:9.6.1-slim
     ports:
       - "8983:8983"
+    volumes:
+      - ./data/solr:/var/solr
+      - ./solr_conf:/solr_conf
     command:
       - solr-precreate
       - blacklight-core
       - /solr_conf
-    volumes:
-      - ./data/solr:/var/solr
-      - ./solr_conf:/solr_conf
