@@ -70,23 +70,10 @@ Note: Wherever possible a service's data is stored on the host machine so it per
 
 | Service   | Name        | URL                                    | Username | Password   | Data Location    |
 |-----------|-------------|----------------------------------------|----------|------------|------------------|
-| MapStore  | `mapstore`  | <http://localhost:8081/mapstore/>      | `admin`  | `admin`    | PostGIS          |
 | GeoServer | `geoserver` | <http://localhost:8080/geoserver/web/> | `gis`    | `password` | `data/geoserver` |
+| MapStore  | `mapstore`  | <http://localhost:8081/mapstore/>      | `admin`  | `admin`    | PostGIS          |
 | PostGIS   | `postgis`   | N/A                                    | `gis`    | `password` | `data/postgis`   |
 | Solr      | `solr`      | <http://localhost:8983/solr/>          | N/A      | N/A        | `data/solr`      |
-
-### MapStore (mapstore)
-
-> [MapStore](https://docs.mapstore.geosolutionsgroup.com/) is a highly modular Open Source WebGIS framework to create, manage and securely share maps and mashups.
-
-Once the service is running you can access MapStore at <http://localhost:8081/mapstore/>
-
-The credentials for logging in as the MapStore admin are:
-
-- Username: `admin`
-- Password: `admin`
-
-MapStore's data is stored in the PostGIS database describe below.
 
 ### GeoServer (geoserver)
 
@@ -104,6 +91,19 @@ GeoServers's data is stored in `data/geoserver`.
 Demo data is enabled by default to facilitate learning & using the service right out of the box.
 
 Configuration options for the GeoServer Docker image can be found at <https://github.com/geoserver/docker>.
+
+### MapStore (mapstore)
+
+> [MapStore](https://docs.mapstore.geosolutionsgroup.com/) is a highly modular Open Source WebGIS framework to create, manage and securely share maps and mashups.
+
+Once the service is running you can access MapStore at <http://localhost:8081/mapstore/>
+
+The credentials for logging in as the MapStore admin are:
+
+- Username: `admin`
+- Password: `admin`
+
+MapStore's data is stored in the PostGIS database describe below.
 
 ### PostGIS (postgis)
 
